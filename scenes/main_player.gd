@@ -8,9 +8,11 @@ const JUMP_VELOCITY = -400.0
 
 func _physics_process(delta: float) -> void:
 	if (velocity.x < -1 || velocity.x > 1 ):
-		animated_sprite_2d.animation = "default"
+		if animated_sprite_2d.animation != "default":
+			animated_sprite_2d.play("default")
 	else:
-		animated_sprite_2d.animation = "default_yes" 
+		if animated_sprite_2d.animation != "default_yes":
+			animated_sprite_2d.play("default_yes")
 	
 	
 	
@@ -35,3 +37,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	var isLeft = velocity.x < 0
 	animated_sprite_2d.flip_h = isLeft
+	
+	if is_on_floor():
+		velocity.y = JUMP_VELOCITY
