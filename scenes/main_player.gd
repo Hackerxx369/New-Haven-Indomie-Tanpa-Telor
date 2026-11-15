@@ -4,7 +4,7 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-
+@onready var audios: AudioStreamPlayer2D = $"../Audios"
 
 func _physics_process(delta: float) -> void:
 	if (velocity.x < -1 || velocity.x > 1 ):
@@ -40,3 +40,6 @@ func _physics_process(delta: float) -> void:
 	
 	if is_on_floor():
 		velocity.y = JUMP_VELOCITY
+	if is_on_wall():
+		velocity.y = JUMP_VELOCITY
+		
